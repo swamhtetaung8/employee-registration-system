@@ -17,6 +17,13 @@ class StoreEmployeeUpload extends DBTransaction
 {
     private $request,$file;
 
+    /**
+     * Storing employee request information and upload file information
+     * @author Swam Htet Aung
+     *
+     * @create date 03-07-2023
+     * @return void
+     */
     public function __construct($request,$file)
     {
         $this->request = $request;

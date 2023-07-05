@@ -31,10 +31,18 @@ class EmployeeController extends Controller
 {
     protected $employeeInterface,$employeeUploadInterface;
 
+    /**
+     * Storing Interface variables
+     * @author Swam Htet Aung
+     *
+     * @create date 03-07-2023
+     * @return void
+     */
     public function __construct(EmployeeInterface $employeeInterface,EmployeeUploadInterface $employeeUploadInterface)
     {
         $this->employeeInterface = $employeeInterface;
         $this->employeeUploadInterface = $employeeUploadInterface;
+        $this->middleware('emp.exists',['only'=>['show','update','edit','destroy','inactive','active']]);
     }
 
     /**
@@ -121,9 +129,6 @@ class EmployeeController extends Controller
     public function show($id)
     {
         $employee = $this->employeeInterface->getEmployee($id);
-        if(!$employee){
-            return abort(404);
-        }
         $employeePhoto = $this->employeeUploadInterface->getEmployeeUpload($employee->employee_id);
 
         return view('employee.show',['employee'=>$employee,'employeePhoto'=>$employeePhoto->file_path ?? 'https://i.pinimg.com/564x/16/3e/39/163e39beaa36d1f9a061b0f0c5669750.jpg']);
@@ -140,9 +145,7 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         $employee = $this->employeeInterface->getEmployee($id);
-        if (!$employee) { #Checking if employee with specified id exists
-            return abort(404);
-        }
+
         $employeePhoto = $this->employeeUploadInterface->getEmployeeUpload($employee->employee_id);
 
         return view('employee.edit',['employee'=>$employee,'employeePhoto'=>$employeePhoto->file_path ?? 'https://i.pinimg.com/564x/16/3e/39/163e39beaa36d1f9a061b0f0c5669750.jpg']);
@@ -150,13 +153,17 @@ class EmployeeController extends Controller
 
     /**
      * Update the specified employee's information.
+     * @author Swam Htet Aung
      *
+     * @create date 26-06-2023
      * @param  Request $request
      * @param  $id
      * @return redirect
      */
     public function update(UpdateEmployeeRequest $request, $id)
     {
+        $employee = $this->employeeInterface->getEmployee($id);
+
         $updateEmployee = new UpdateEmployee($request,$id);
         $updateEmployee = $updateEmployee->executeProcess();
 
@@ -202,16 +209,20 @@ class EmployeeController extends Controller
 
     /**
      * Delete the specified employee.
+     * @author Swam Htet Aung
      *
+     * @create date 26-06-2023
      * @param  $id
      * @return redirect
      */
     public function destroy($id)
     {
-        $employee = $this->employeeInterface->getEmployee($id);
-        if (!$employee) { #Checking if employee with specified id exists
-            return abort(404);
+        if (session('employee')->id == $id) { #Checking if current employee is going to be deleted
+            return redirect()->back()->with(['error'=>'Cannot delete employee who is currently logged in']);
         }
+
+        $employee = $this->employeeInterface->getEmployee($id);
+
         $deleteEmployee = new DeleteEmployee($id);
         $deleteEmployee = $deleteEmployee->executeProcess();
 
@@ -233,9 +244,7 @@ class EmployeeController extends Controller
     public function inactive($id)
     {
         $employee = $this->employeeInterface->getEmployee($id);
-        if (!$employee) { #Checking if employee with specified id exists
-            return abort(404);
-        }
+
         $inactiveEmployee = new InactiveEmployee($id);
         $inactiveEmployee = $inactiveEmployee->executeProcess();
         if ($inactiveEmployee) { #Checking if inactive process is successful
@@ -256,9 +265,7 @@ class EmployeeController extends Controller
     public function active($id)
     {
         $employee = $this->employeeInterface->getEmployee($id);
-        if (!$employee) { #Checking if employee with specified id exists
-            return abort(404);
-        }
+
         $activeEmployee = new ActiveEmployee($id);
         $activeEmployee = $activeEmployee->executeProcess();
         if ($activeEmployee) { #Checking if active process is successful

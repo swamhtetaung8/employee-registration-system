@@ -18,6 +18,13 @@ class DeleteEmployee extends DBTransaction
 {
     private $id;
 
+    /**
+     * Storing employee id
+     * @author Swam Htet Aung
+     *
+     * @create date 03-07-2023
+     * @return void
+     */
     public function __construct($id)
     {
         $this->id = $id;

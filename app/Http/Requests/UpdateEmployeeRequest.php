@@ -37,8 +37,7 @@ class UpdateEmployeeRequest extends FormRequest
      */
     public function rules()
     {
-        $employee = Employee::where('employee_id', request()->employee_id)->first();
-        $id = $employee->id;
+        $id = request()->employee;
         return [
             'employee_id' => 'required|numeric',
             'employee_code' => 'required',

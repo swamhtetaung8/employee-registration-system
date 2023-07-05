@@ -28,6 +28,13 @@ class ExcelDownloadExport implements WithTitle,FromView,WithStyles,WithEvents,Wi
     use RegistersEventListeners;
 
 
+    /**
+     * Storing employee collection
+     * @author Swam Htet Aung
+     *
+     * @create date 03-07-2023
+     * @return void
+     */
     public function __construct($employees)
     {
         $this->employees = $employees;

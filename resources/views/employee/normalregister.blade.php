@@ -2,7 +2,7 @@
     @csrf
     <div class="row align-items-center my-3">
         <div class="col-md-3">
-            <label for="" class="form-label">Employee ID <span class=" text-danger">*</span></label>
+            <label for="" class="form-label">@lang('public.employee_id') <span class=" text-danger">*</span></label>
         </div>
         <div class="col-md-4">
             <input type="text" class="form-control" disabled value="{{ $default_emp_id }}">
@@ -11,7 +11,7 @@
     </div>
     <div class="row align-items-center my-3">
         <div class="col-md-3">
-            <label for="employee_code" class="form-label">Employee Code <span class=" text-danger">*</span></label>
+            <label for="employee_code" class="form-label">@lang('public.employee_code') <span class=" text-danger">*</span></label>
         </div>
         <div class="col-md-4">
             <input id="employee_code" type="text" name="employee_code" class="form-control @error('employee_code')
@@ -26,7 +26,7 @@
     </div>
     <div class="row align-items-center my-3">
         <div class="col-md-3">
-            <label for="employee_name" class="form-label">Employee Name <span class=" text-danger">*</span></label>
+            <label for="employee_name" class="form-label">@lang('public.employee_name') <span class=" text-danger">*</span></label>
         </div>
         <div class="col-md-4">
             <input id="employee_name" type="text" name="employee_name" class="form-control  @error('employee_name')
@@ -41,7 +41,7 @@
     </div>
     <div class="row align-items-center my-3">
         <div class="col-md-3">
-            <label for="nrc_number" class="form-label">NRC Number <span class=" text-danger">*</span></label>
+            <label for="nrc_number" class="form-label">@lang('public.nrc_number') <span class=" text-danger">*</span></label>
         </div>
         <div class="col-md-4">
             <input id="nrc_number" type="text" name="nrc_number" class="form-control  @error('nrc_number')
@@ -56,7 +56,7 @@
     </div>
     <div class="row align-items-center my-3">
         <div class="col-md-3">
-            <label for="password" class="form-label">Password <span class=" text-danger">*</span></label>
+            <label for="password" class="form-label">@lang('public.password') <span class=" text-danger">*</span></label>
         </div>
         <div class="col-md-4 relative">
             <div class="input-group">
@@ -72,17 +72,17 @@
             @enderror
         </div>
         <div class="col-md-4">
-            <button type="button" id="generatePassword" class="btn btn-primary">Generate Password</button>
+            <button type="button" id="generatePassword" class="btn btn-primary">@lang('public.generate_password')</button>
         </div>
     </div>
     <div class="text-danger d-flex gap-3 align-items-center">
         <i class="bi bi-exclamation-triangle mb-0"></i>
-        <p class="mb-0">Password length must be between 4 to 8 and contained capital letter, small letter, special characters and numbers </p>
+        <p class="mb-0">@lang('public.password_length')</p>
     </div>
 
     <div class="row align-items-center my-3">
         <div class="col-md-3">
-            <label for="email_address" class="form-label">Email Address <span class=" text-danger">*</span></label>
+            <label for="email_address" class="form-label">@lang('public.email_address')<span class=" text-danger">*</span></label>
         </div>
         <div class="col-md-4">
             <input id="email_address" type="text" name="email_address" class="form-control  @error('email_address')
@@ -97,22 +97,22 @@
     </div>
     <div class="row align-items-center my-3">
         <div class="col-md-3">
-            <label for="" class="form-label">Gender</label>
+            <label for="" class="form-label">@lang('public.gender')</label>
         </div>
         <div class="col-md-4 d-flex gap-3">
             <div class=" form-check">
-                <label for="male" class=" form-check-label">Male</label>
+                <label for="male" class=" form-check-label">@lang('public.male')</label>
                 <input type="radio" id="male" name="gender" value="1" class=" form-check-input" {{ old('gender') == 1 ? 'checked' : '' }}>
             </div>
             <div class=" form-check">
-                <label for="female" class=" form-check-label">Female</label>
+                <label for="female" class=" form-check-label">@lang('public.female')</label>
                 <input type="radio" id="female" name="gender" value="2" class=" form-check-input" {{ old('gender') == 2 ? 'checked' : '' }}>
             </div>
         </div>
     </div>
     <div class="row align-items-center my-3">
         <div class="col-md-3">
-            <label for="date_of_birth" class="form-label">Date of Birth <span class=" text-danger">*</span></label>
+            <label for="date_of_birth" class="form-label">@lang('public.date_of_birth')<span class=" text-danger">*</span></label>
         </div>
         <div class="col-md-4">
             <input id="date_of_birth" type="date" value="{{ old('date_of_birth') }}" name="date_of_birth" class="form-control  @error('date_of_birth')
@@ -127,20 +127,20 @@
     </div>
     <div class="row align-items-center my-3">
         <div class="col-md-3">
-            <label for="marital_status" class="form-label">Marital Status </label>
+            <label for="marital_status" class="form-label">@lang('public.marital_status')</label>
         </div>
         <div class="col-md-4 d-flex gap-3">
            <select name="marital_status" class="form-select" id="marital_status">
                 <option value="none">---Select---</option>
-                <option value="1" {{ old('marital_status') == 1 ? 'selected' : '' }}>Single</option>
-                <option value="2" {{ old('marital_status') == 2 ? 'selected' : '' }}>Married</option>
-                <option value="3" {{ old('marital_status') == 3 ? 'selected' : '' }}>Divorced</option>
+                <option value="1" {{ old('marital_status') == 1 ? 'selected' : '' }}>@lang('public.single')</option>
+                <option value="2" {{ old('marital_status') == 2 ? 'selected' : '' }}>@lang('public.married')</option>
+                <option value="3" {{ old('marital_status') == 3 ? 'selected' : '' }}>@lang('public.divorced')</option>
            </select>
         </div>
     </div>
     <div class="row my-3">
         <div class="col-md-3">
-            <label for="address" class="form-label">Address </label>
+            <label for="address" class="form-label">@lang('public.address')</label>
         </div>
         <div class="col-md-9">
            <textarea name="address" class=" form-control" id="address" cols="30" rows="4"> {{ old('address') }}</textarea>
@@ -148,7 +148,7 @@
     </div>
     <div class="row my-3">
         <div class="col-md-3">
-            <label for="photo" class="form-label">Upload Photo </label>
+            <label for="photo" class="form-label">@lang('public.upload_photo')</label>
         </div>
         <div class="col-md-4">
            <input type="file" id="photo" name="photo" class=" form-control @error('photo')
@@ -162,10 +162,10 @@
            <img src="" id="uploadedPhoto" class="mt-3 object-fit-cover d-none rounded-pill" width="200" height="200" alt="">
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-primary d-none" id="removePhoto">Remove</button>
+            <button type="button" class="btn btn-danger d-none" id="removePhoto">@lang('public.remove')</button>
         </div>
     </div>
     <div class="d-flex justify-content-center mt-5 mb-3">
-        <button class=" btn btn-primary px-5 py-2" type="submit">Save</button>
+        <button class=" btn btn-primary px-5 py-2" type="submit">@lang('public.save')</button>
     </div>
 </form>

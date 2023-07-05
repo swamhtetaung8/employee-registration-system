@@ -18,6 +18,13 @@ class StoreEmployee extends DBTransaction
 {
     private $request;
 
+    /**
+     * Storing employee request information
+     * @author Swam Htet Aung
+     *
+     * @create date 03-07-2023
+     * @return void
+     */
     public function __construct($request)
     {
         $this->request = $request;

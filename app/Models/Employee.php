@@ -15,4 +15,9 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     protected $guarded = [];
+
+    public function upload()
+    {
+        return $this->hasOne(EmployeeUpload::class,'employee_id','employee_id');
+    }
 }

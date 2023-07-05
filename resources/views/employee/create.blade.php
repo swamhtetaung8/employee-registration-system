@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Employee Register
+    @lang('public.employee_register')
 @endsection
 
 
@@ -46,11 +46,11 @@
     <form action="{{ route('employees.create') }}" method="GET" class="bg-white d-flex gap-5 my-3 border p-3 rounded">
         <div class=" form-check">
             <input type="radio" id="normal" class=" form-check-input" name="register_type" value="1" {{ request()->register_type == 1 ? 'checked' : '' }}>
-            <label for="normal" class=" form-check-label">Normal Register</label>
+            <label for="normal" class=" form-check-label">@lang('public.normal_register')</label>
         </div>
         <div class=" form-check">
             <input type="radio" id="excel" class=" form-check-input" name="register_type" value="2" {{ request()->register_type == 2 ? 'checked' : '' }}>
-            <label for="excel" class=" form-check-label">Excel Register</label>
+            <label for="excel" class=" form-check-label">@lang('public.excel_register')</label>
         </div>
         <input id="changeSubmitType" type="submit" class=" d-none">
     </form>

@@ -28,7 +28,7 @@ class CreateEmployeesTable extends Migration
             $table->integer('gender')->nullable();
             $table->date('date_of_birth');
             $table->integer('marital_status')->nullable();
-            $table->string('address',255)->nullable();
+            $table->longText('address')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });

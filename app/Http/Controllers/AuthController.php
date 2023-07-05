@@ -50,6 +50,11 @@ class AuthController extends Controller
             }
 
             session()->put('employee',$employee);
+            if(isset($employee->upload->file_path)){
+                session()->put('employee_photo',asset($employee->upload->file_path));
+            }else{
+                session()->put('employee_photo','https://i.pinimg.com/564x/16/3e/39/163e39beaa36d1f9a061b0f0c5669750.jpg');
+            }
 
             return redirect()->route('employees.index');
         }
@@ -68,6 +73,7 @@ class AuthController extends Controller
     public function logout()
     {
         session()->forget('employee');
+        session()->forget('employee_photo');
         return redirect()->route('auth.login');
     }
 }

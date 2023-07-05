@@ -25,14 +25,17 @@ Route::middleware('emp.authenticated')->group(function(){
 
     Route::prefix('employees')->name('employees.')->group(function(){
         //Employee inactive handling
-        Route::post('/inactive/{id}','EmployeeController@inactive')->name('inactive');
+        Route::post('/inactive/{employee}','EmployeeController@inactive')->name('inactive');
         //Employee active handling
-        Route::post('/active/{id}','EmployeeController@active')->name('active');
+        Route::post('/active/{employee}','EmployeeController@active')->name('active');
         //Excel format export
         Route::get('/excel/export','ExcelController@export')->name('excelexport');
         //Excel import
         Route::post('/excel/import','ExcelController@import')->name('excelimport');
     });
+
+    //To handle language changes
+    Route::get('/locale/{lang}','LocalizationController@changeLang')->name('lang');
 
     //PDF and Excel Download
     Route::get('/download','EmployeeController@download')->name('employees.download');

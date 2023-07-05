@@ -17,6 +17,13 @@ class UpdateEmployeeUpload extends DBTransaction
 {
     private $request,$file;
 
+    /**
+     * Storing employee request information and upload file information
+     * @author Swam Htet Aung
+     *
+     * @create date 03-07-2023
+     * @return void
+     */
     public function __construct($request,$file)
     {
         $this->request = $request;
@@ -44,6 +51,9 @@ class UpdateEmployeeUpload extends DBTransaction
             $employeeUpload = $employeeUpload->update();
 
             if ($employeeUpload) {  #Checking if updating the employee upload information succeeded
+                if (session('employee')->employee_id == $request->employee_id) { #Checking if logged in employee is the same as updated employee
+                    session()->put('employee_photo',asset($file['path']));
+                }
                 return ['status' =>true,'error' =>''];
             }else{
                 return ['status' =>false,'error' =>'Failed'];

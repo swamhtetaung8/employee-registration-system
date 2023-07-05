@@ -17,6 +17,13 @@ class UpdateEmployee extends DBTransaction
 {
     private $request,$id;
 
+    /**
+     * Storing employee id and request information
+     * @author Swam Htet Aung
+     *
+     * @create date 03-07-2023
+     * @return void
+     */
     public function __construct($request,$id)
     {
         $this->request = $request;
@@ -58,6 +65,9 @@ class UpdateEmployee extends DBTransaction
             $employee = $employee->update();
 
             if ($employee) { #Checking if updating the employee information succeeded
+                if (session('employee')->id == $this->id) { #Checking if logged in employee is the same as updated employee
+                    session()->put('employee',Employee::find($this->id));
+                }
                 return ['status' =>true,'error' =>''];
             }else{
                 return ['status' =>false,'error' =>'Failed'];
