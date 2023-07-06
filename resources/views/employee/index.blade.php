@@ -28,20 +28,20 @@
                 <div class="col-6">
                     <div class="row align-items-center">
                         <div class="col-3">
-                            <label for="employee_id">@lang('public.employee_id')</label>
+                            <label for="searchEmpId">@lang('public.employee_id')</label>
                         </div>
                         <div class="col-6">
-                            <input id="searchEmpId" type="text" name="employee_id" class=" form-control" id="employee_id" value="{{ request()->employee_id  ??null }}">
+                            <input id="searchEmpId" type="text" name="employee_id" class=" form-control" value="{{ request()->employee_id  ??null }}">
                         </div>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="row align-items-center">
                         <div class="col-3">
-                            <label for="employee_code">@lang('public.employee_code')</label>
+                            <label for="searchEmpCode">@lang('public.employee_code')</label>
                         </div>
                         <div class="col-6">
-                            <input id="searchEmpCode" type="text" name="employee_code" class=" form-control" id="employee_code" value="{{ request()->employee_code??null }}">
+                            <input id="searchEmpCode" type="text" name="employee_code" class=" form-control" value="{{ request()->employee_code??null }}">
                         </div>
                     </div>
                 </div>
@@ -50,20 +50,20 @@
                 <div class="col-6">
                     <div class="row align-items-center">
                         <div class="col-3">
-                            <label for="employee_name">@lang('public.employee_name')</label>
+                            <label for="searchEmpName">@lang('public.employee_name')</label>
                         </div>
                         <div class="col-6">
-                            <input id="searchEmpName" type="text" name="employee_name" class=" form-control" id="employee_name" value="{{ request()->employee_name??null }}">
+                            <input id="searchEmpName" type="text" name="employee_name" class=" form-control" value="{{ request()->employee_name??null }}">
                         </div>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="row align-items-center">
                         <div class="col-3">
-                            <label for="email">@lang('public.email_address')</label>
+                            <label for="searchEmailAddress">@lang('public.email_address')</label>
                         </div>
                         <div class="col-6">
-                            <input id="searchEmailAddress" type="text" name="email_address" class=" form-control" id="email" value="{{ request()->email_address??null }}">
+                            <input id="searchEmailAddress" type="text" name="email_address" class=" form-control" value="{{ request()->email_address??null }}">
                         </div>
                     </div>
                 </div>
