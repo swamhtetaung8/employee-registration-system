@@ -111,13 +111,13 @@
                             <td class="text-center">{{ $employee->email_address }}</td>
                             <td class="text-center">
                                 @if ($employee->deleted_at==null)
-                                <a href="{{ route('employees.edit',$employee->id) }}" class="btn bi bi-pencil-square text-black"></a>
+                                <a href="{{ route('employees.edit',$employee->id) }}" class="btn btn-sm bi bi-pencil-square text-black"></a>
                                 @else
-                                <i class=" btn pe-none bi bi-pencil-square text-black-50"></i>
+                                <i class=" btn btn-sm pe-none bi bi-pencil-square text-black-50"></i>
                                 @endif
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('employees.show',$employee->id) }}" class="btn bi bi-journal-text text-success"></a>
+                                <a href="{{ route('employees.show',$employee->id) }}" class="btn btn-sm bi bi-journal-text text-black"></a>
                             </td>
                             <td class="text-center">
                                 @if ($employee->deleted_at==null)
@@ -132,11 +132,11 @@
                                         <div class="d-flex px-4 pb-5 gap-5 justify-content-evenly align-items-center mt-3">
                                             <form action="{{ route('employees.inactive',$employee->id) }}" method="POST">
                                                 @csrf
-                                                <button class="btn btn-success">
+                                                <button class="btn btn-primary">
                                                   Inactive
                                                 </button>
                                             </form>
-                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">@lang('public.close')</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@lang('public.close')</button>
                                         </div>
                                       </div>
                                     </div>
@@ -154,11 +154,11 @@
                                         <div class="d-flex px-4 pb-5 gap-5 justify-content-evenly align-items-center mt-3">
                                             <form action="{{ route('employees.active',$employee->id) }}" method="POST">
                                                 @csrf
-                                                <button class="btn btn-success">
+                                                <button class="btn btn-primary">
                                                   Active
                                                 </button>
                                             </form>
-                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">@lang('public.close')</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@lang('public.close')</button>
                                         </div>
                                       </div>
                                     </div>
@@ -167,10 +167,10 @@
                             </td>
                             <td class="text-center">
                                 @if ($employee->deleted_at==null)
-                                    <button type="button" class="bi bi-trash text-danger btn text-center" data-bs-toggle="modal" data-bs-target="#{{$employee->employee_id.'delete'}}">
+                                    <button type="button" class="bi bi-trash text-danger btn btn-sm text-center" data-bs-toggle="modal" data-bs-target="#{{$employee->employee_id.'delete'}}">
                                     </button>
                                 @else
-                                    <i class=" btn pe-none bi bi-trash text-black-50"></i>
+                                    <i class=" btn btn-sm pe-none bi bi-trash text-black-50"></i>
                                 @endif
                                 <div class="modal fade" id="{{$employee->employee_id.'delete'}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
@@ -181,11 +181,11 @@
                                             <form action="{{ route('employees.destroy',$employee->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-success">
+                                                <button class="btn btn-danger">
                                                   Delete
                                                 </button>
                                             </form>
-                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">@lang('public.close')</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@lang('public.close')</button>
                                         </div>
                                       </div>
                                     </div>

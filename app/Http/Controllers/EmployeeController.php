@@ -164,6 +164,9 @@ class EmployeeController extends Controller
     {
         $employee = $this->employeeInterface->getEmployee($id);
 
+        $empCountBeforeCurrent = $this->employeeInterface->getEmpCountBeforeCurrent($id);
+        $pageNo = floor($empCountBeforeCurrent/20)+1;
+
         if($employee->deleted_at !== null) {
             return redirect()->back()->with(['error'=>'Cannot update employee who is inactive']);
         }
@@ -196,7 +199,7 @@ class EmployeeController extends Controller
             }
 
             if ($updateEmployee && $fileUpload) { #Checking if storing employee and employee's uploaded succeeded
-                return redirect()->route('employees.index')->with(['status'=>'Successfully updated']);
+                return redirect()->route('employees.index',['page'=>$pageNo])->with(['status'=>'Successfully updated']);
             } else {
                 return redirect()->back()->with(['error'=>'Update Failed']);
             }
@@ -204,7 +207,7 @@ class EmployeeController extends Controller
 
 
         if ($updateEmployee) { #Checking if storing employee succeeded
-            return redirect()->route('employees.index')->with(['status'=>'Successfully updated']);
+            return redirect()->route('employees.index',['page'=>$pageNo])->with(['status'=>'Successfully updated']);
         } else {
             return redirect()->back()->with(['error'=>'Update Failed']);
         }

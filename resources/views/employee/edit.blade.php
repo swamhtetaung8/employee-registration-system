@@ -14,7 +14,13 @@
             <form action="{{ route('employees.update',$employee->id) }}" method="POST" class="bg-body-tertiary border rounded p-3 my-3" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-            <p class="fs-4"><i class="bi bi-person me-2"></i><span class=" border-bottom border-3 border-primary">@lang('public.employee_edit')</span> </p>
+
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="fs-4 mb-0"><i class="bi bi-person me-2"></i><span class=" border-bottom border-3 border-primary">@lang('public.employee_edit')</span> </p>
+                </div>
+                <a href="{{session()->get('_previous')['url'] }}" class="btn btn-outline-primary">Back</a>
+            </div>
             <div class="my-3">
                 <div class="row my-4">
                     <div class="col-md-4 d-flex gap-3">

@@ -95,4 +95,17 @@ class EmployeeRepository implements EmployeeInterface
          })->offset((request()->page-1)*20)->limit(20)->get();
          return $employees;
      }
+
+     /**
+     * Get all employees before current employee'id
+     * @author Swam Htet Aung
+     *
+     * @create date 06-07-2023
+     * @return collection
+     */
+
+     public function getEmpCountBeforeCurrent($id)
+     {
+        return Employee::where('id','<',$id)->get()->count();
+     }
 }
