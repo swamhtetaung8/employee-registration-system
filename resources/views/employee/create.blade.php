@@ -44,13 +44,13 @@
     @endforeach
     @endif
     <form action="{{ route('employees.create') }}" method="GET" class="bg-white d-flex gap-5 my-3 border p-3 rounded">
-        <div class=" form-check">
+        <div class=" form-check d-flex align-items-center gap-3">
             <input type="radio" id="normal" class=" form-check-input" name="register_type" value="1" {{ request()->register_type == 1 ? 'checked' : '' }}>
-            <label for="normal" class=" form-check-label">@lang('public.normal_register')</label>
+            <label for="normal" class=" form-check-label fs-5">@lang('public.normal_register')</label>
         </div>
-        <div class=" form-check">
+        <div class=" form-check d-flex align-items-center gap-3">
             <input type="radio" id="excel" class=" form-check-input" name="register_type" value="2" {{ request()->register_type == 2 ? 'checked' : '' }}>
-            <label for="excel" class=" form-check-label">@lang('public.excel_register')</label>
+            <label for="excel" class=" form-check-label fs-5">@lang('public.excel_register')</label>
         </div>
         <input id="changeSubmitType" type="submit" class=" d-none">
     </form>

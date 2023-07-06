@@ -6,8 +6,8 @@
 
 @section('content')
 
-            <div class="bg-white border rounded p-3 my-3">
-                <p class="fs-4"><i class="bi bi-person me-2"></i>@lang('public.employee_detail')</p>
+            <div class="bg-body-tertiary border rounded p-3 my-3">
+                <p class="fs-4"><i class="bi bi-person me-2"></i><span class=" border-bottom border-3 border-primary"> @lang('public.employee_detail')</span></p>
             <div class="my-3">
                 <div class="row my-4">
                     <div class="col-md-4 d-flex gap-3">

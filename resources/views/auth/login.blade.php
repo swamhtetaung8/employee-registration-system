@@ -6,7 +6,7 @@ Login
 
 @section('content')
 <div class=" min-vh-100 w-100 d-flex justify-content-center align-items-center">
-    <div class="bg-white border rounded-4 px-5 py-4 shadow-sm text-center">
+    <div class="bg-body-tertiary border rounded-4 px-5 py-4 shadow-sm text-center">
         <img src="{{ asset('logos/hero-logo.svg') }}" width="100px" class="mx-auto mb-2" alt="">
         <h3>@lang('public.title')</h3>
         @if ($errors->any())

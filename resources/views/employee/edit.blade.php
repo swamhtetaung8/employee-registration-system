@@ -11,10 +11,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
-            <form action="{{ route('employees.update',$employee->id) }}" method="POST" class="bg-white border rounded p-3 my-3" enctype="multipart/form-data">
+            <form action="{{ route('employees.update',$employee->id) }}" method="POST" class="bg-body-tertiary border rounded p-3 my-3" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-            <p class="fs-4"><i class="bi bi-person me-2"></i>@lang('public.employee_edit')</p>
+            <p class="fs-4"><i class="bi bi-person me-2"></i><span class=" border-bottom border-3 border-primary">@lang('public.employee_edit')</span> </p>
             <div class="my-3">
                 <div class="row my-4">
                     <div class="col-md-4 d-flex gap-3">

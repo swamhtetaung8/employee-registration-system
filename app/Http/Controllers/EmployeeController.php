@@ -164,6 +164,9 @@ class EmployeeController extends Controller
     {
         $employee = $this->employeeInterface->getEmployee($id);
 
+        if($employee->deleted_at !== null) {
+            return redirect()->back()->with(['error'=>'Cannot update employee who is inactive']);
+        }
         $updateEmployee = new UpdateEmployee($request,$id);
         $updateEmployee = $updateEmployee->executeProcess();
 
@@ -222,6 +225,10 @@ class EmployeeController extends Controller
         }
 
         $employee = $this->employeeInterface->getEmployee($id);
+
+        if($employee->deleted_at !== null) {
+            return redirect()->back()->with(['error'=>'Cannot delete employee who is inactive']);
+        }
 
         $deleteEmployee = new DeleteEmployee($id);
         $deleteEmployee = $deleteEmployee->executeProcess();

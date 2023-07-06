@@ -21,8 +21,8 @@
         </div>
     @endif
 
-    <div class="bg-white border rounded p-3 my-3">
-        <p class="fs-4"><i class="bi bi-people me-2"></i> @lang('public.employee_list')</p>
+    <div class="bg-body-tertiary border rounded p-3 my-3">
+        <p class="fs-4"><i class="bi bi-people me-2"></i> <span class=" border-bottom border-3 border-primary">@lang('public.employee_list')</span></p>
         <form id="searchForm" action="{{ route('employees.index') }}" class="my-3">
             <div class="row my-4">
                 <div class="col-6">
@@ -126,9 +126,10 @@
                                 </button>
                                 <div class="modal fade" id="{{$employee->employee_id.'inactive'}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
-                                      <div class="modal-content px-4 py-5">
-                                        <p class=" fs-5">@lang('public.inactive_modal')</p>
-                                        <div class="d-flex gap-5 justify-content-evenly align-items-center mt-3">
+                                        <div class="modal-content ">
+                                          <div class="modal-header"><span class=" fw-medium">Inactive Employee {{ $employee->employee_id }}</span></div>
+                                        <p class=" fs-5 pt-4">@lang('public.inactive_modal')</p>
+                                        <div class="d-flex px-4 pb-5 gap-5 justify-content-evenly align-items-center mt-3">
                                             <form action="{{ route('employees.inactive',$employee->id) }}" method="POST">
                                                 @csrf
                                                 <button class="btn btn-success">
@@ -147,9 +148,10 @@
                                 </button>
                                 <div class="modal fade" id="{{$employee->employee_id.'active'}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
-                                      <div class="modal-content px-4 py-5">
-                                        <p class=" fs-5">@lang('public.active_modal')</p>
-                                        <div class="d-flex gap-5 justify-content-evenly align-items-center mt-3">
+                                        <div class="modal-content ">
+                                          <div class="modal-header"><span class=" fw-medium">Active Employee {{ $employee->employee_id }}</span></div>
+                                        <p class=" fs-5 pt-4">@lang('public.active_modal')</p>
+                                        <div class="d-flex px-4 pb-5 gap-5 justify-content-evenly align-items-center mt-3">
                                             <form action="{{ route('employees.active',$employee->id) }}" method="POST">
                                                 @csrf
                                                 <button class="btn btn-success">
@@ -172,14 +174,15 @@
                                 @endif
                                 <div class="modal fade" id="{{$employee->employee_id.'delete'}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
-                                      <div class="modal-content px-4 py-5">
-                                        <p class=" fs-5">@lang('public.delete_modal')</p>
-                                        <div class="d-flex gap-5 justify-content-evenly align-items-center mt-3">
+                                        <div class="modal-content ">
+                                          <div class="modal-header"><span class=" fw-medium">Delete Employee {{ $employee->employee_id }}</span></div>
+                                        <p class=" fs-5 pt-4">@lang('public.delete_modal')</p>
+                                        <div class="d-flex px-4 pb-5 gap-5 justify-content-evenly align-items-center mt-3">
                                             <form action="{{ route('employees.destroy',$employee->id) }}" method="POST">
                                                 @csrf
-                                                @method('delete')
+                                                @method('DELETE')
                                                 <button class="btn btn-success">
-                                                    Delete
+                                                  Delete
                                                 </button>
                                             </form>
                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">@lang('public.close')</button>

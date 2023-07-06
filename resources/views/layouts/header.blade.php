@@ -1,6 +1,10 @@
 <nav class="py-2 bg-white border border-b sticky-top">
     <div class=" container d-flex align-items-center justify-content-between">
-      <a href="{{ route('employees.index') }}" class=" fs-4 text-decoration-none text-black">@lang('public.title')</a>
+      <a href="{{ route('employees.index') }}" class=" fs-4 text-decoration-none text-black d-flex align-items-center gap-2">
+        <img src="{{ asset('logos/hero-logo.svg') }}" width="30px" alt="">
+        <span>
+          @lang('public.title')
+        </span></a>
       <ul class=" nav nav-underline d-flex list-unstyled gap-4 align-items-center mb-0" >
           <li class="nav-item">
               <a href="{{ route('employees.create',['register_type'=>1]) }}" class=" nav-link text-black {{ request()->path()=='employees/create' ? 'active' : '' }}"  >@lang('public.register')</a>
