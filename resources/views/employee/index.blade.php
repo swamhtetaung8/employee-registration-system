@@ -31,7 +31,7 @@
                             <label for="employee_id">@lang('public.employee_id')</label>
                         </div>
                         <div class="col-6">
-                            <input type="text" name="employee_id" class=" form-control" id="employee_id" value="{{ request()->employee_id  ??null }}">
+                            <input id="searchEmpId" type="text" name="employee_id" class=" form-control" id="employee_id" value="{{ request()->employee_id  ??null }}">
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                             <label for="employee_code">@lang('public.employee_code')</label>
                         </div>
                         <div class="col-6">
-                            <input type="text" name="employee_code" class=" form-control" id="employee_code" value="{{ request()->employee_code??null }}">
+                            <input id="searchEmpCode" type="text" name="employee_code" class=" form-control" id="employee_code" value="{{ request()->employee_code??null }}">
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                             <label for="employee_name">@lang('public.employee_name')</label>
                         </div>
                         <div class="col-6">
-                            <input type="text" name="employee_name" class=" form-control" id="employee_name" value="{{ request()->employee_name??null }}">
+                            <input id="searchEmpName" type="text" name="employee_name" class=" form-control" id="employee_name" value="{{ request()->employee_name??null }}">
                         </div>
                     </div>
                 </div>
@@ -63,13 +63,13 @@
                             <label for="email">@lang('public.email_address')</label>
                         </div>
                         <div class="col-6">
-                            <input type="text" name="email_address" class=" form-control" id="email" value="{{ request()->email_address??null }}">
+                            <input id="searchEmailAddress" type="text" name="email_address" class=" form-control" id="email" value="{{ request()->email_address??null }}">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="d-flex justify-content-center gap-5 mt-5">
-                <button class="btn btn-primary">@lang('public.search')</button>
+                <button id="searchSubmitBtn" type="button" class="btn btn-primary">@lang('public.search')</button>
                 <a href="{{ route('employees.download') }}?{{ http_build_query(request()->all()) }}&type=1" class="btn btn-primary {{ count($employees) == 0 ? 'disabled' : '' }}">@lang('public.pdf_download')</a>
                 <a href="{{ route('employees.download') }}?{{ http_build_query(request()->all()) }}&type=2" class="btn btn-primary {{ count($employees) == 0 ? 'disabled' : '' }}">@lang('public.excel_download')</a>
                 @if (request()->employee_id !='' || request()->employee_code !='' || request()->employee_name !='' || request()->email_address !='')
@@ -209,4 +209,26 @@
             {{ $employees->links() }}
         </div>
     </div>
+@endsection
+
+@section('script')
+<script>
+    const searchEmpId = document.getElementById('searchEmpId');
+    const searchEmpCode = document.getElementById('searchEmpCode');
+    const searchEmpName = document.getElementById('searchEmpName');
+    const searchEmailAddress = document.getElementById('searchEmailAddress');
+    const searchInputs = [searchEmpId,searchEmpCode,searchEmpName,searchEmailAddress];
+    const searchSubmitBtn = document.getElementById('searchSubmitBtn');
+
+    searchInputs.forEach(input=>{
+        input.addEventListener('change',function(){
+            if(searchEmpId.value !== '' || searchEmpCode.value !== '' || searchEmpName.value !== '' || searchEmailAddress.value !== ''){
+                searchSubmitBtn.type = 'submit';
+            }
+        })
+    })
+
+
+
+</script>
 @endsection
