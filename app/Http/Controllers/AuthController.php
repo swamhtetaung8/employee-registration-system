@@ -41,9 +41,15 @@ class AuthController extends Controller
     */
     public function check(LoginRequest $request)
     {
+        $request->validate([
+            'employee_id'=>'integer'
+        ],[
+            'employee_id.integer'=>'Invalid Credentials'
+        ]);
+
         $employee = Employee::where('employee_id', $request->employee_id)->first();
 
-        if($employee){
+        if ($employee) { #Checking if the employee id exists in database
             if (!Hash::check($request->password, $employee->password)) {
                 #To check if the request password matches with the password of the employee
                 return redirect()->route('auth.login')->withErrors(['employee_id'=>'Invalid Credentials']);

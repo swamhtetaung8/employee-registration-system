@@ -72,13 +72,17 @@
                 <button id="searchSubmitBtn" type="button" class="btn btn-primary">@lang('public.search')</button>
                 <a href="{{ route('employees.download') }}?{{ http_build_query(request()->all()) }}&type=1" class="btn btn-primary {{ count($employees) == 0 ? 'disabled' : '' }}">@lang('public.pdf_download')</a>
                 <a href="{{ route('employees.download') }}?{{ http_build_query(request()->all()) }}&type=2" class="btn btn-primary {{ count($employees) == 0 ? 'disabled' : '' }}">@lang('public.excel_download')</a>
-                @if (request()->employee_id !='' || request()->employee_code !='' || request()->employee_name !='' || request()->email_address !='')
+                @if (request()->has('employee_id') || request()->has('employee_code') || request()->has('employee_name') || request()->has('email_address'))
                     <a href="{{ route('employees.index') }}" class="btn btn-outline-danger">@lang('public.reset_search')</a>
                 @endif
             </div>
         </form>
-
-        <div class="table-responsive my-4">
+        @if ($count !== 0)
+            <p class="text-end mb-0 fs-5">
+                Total: <span>{{ $count }}</span>
+            </p>
+        @endif
+        <div class="table-responsive my-3">
 
             <table class="table table-bordered table-hover">
                 <thead class="text-center align-middle">

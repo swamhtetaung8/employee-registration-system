@@ -37,22 +37,8 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'employee_id'=>'required|integer',
+            'employee_id'=>'required',
             'password'=>'required'
-        ];
-    }
-
-    /**
-     * Customize the validation messages.
-     * @author Swam Htet Aung
-     *
-     * @create date 21-06-2023
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            'employee_id.integer'=>'Invalid Credentials',
         ];
     }
 }

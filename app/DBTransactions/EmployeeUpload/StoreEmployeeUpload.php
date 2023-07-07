@@ -51,6 +51,9 @@ class StoreEmployeeUpload extends DBTransaction
             $employeeUpload = $employeeUpload->save();
 
             if ($employeeUpload) {  #Checking if storing the employee upload information succeeded
+                if (session('employee')->employee_id == $request->employee_id) { #Checking if logged in employee is the same as updated employee
+                    session()->put('employee_photo',asset($file['path']));
+                }
                 return ['status' =>true,'error' =>''];
             }else{
                 return ['status' =>false,'error' =>'Failed'];

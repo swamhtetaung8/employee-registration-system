@@ -39,7 +39,7 @@ class EmployeeRepository implements EmployeeInterface
 
     public function getAllEmployeesPaginate($perPage)
     {
-        $employees = Employee::when(request()->employee_id != '',function($query){
+        $employeeQuery = Employee::when(request()->employee_id != '',function($query){
             $employee_id = request()->get('employee_id');
             $query->where('employee_id',$employee_id);
         })->when(request()->employee_code!='',function($query){
@@ -51,8 +51,13 @@ class EmployeeRepository implements EmployeeInterface
         })->when(request()->email_address!='',function($query){
             $email_address = request()->get('email_address');
             $query->where('email_address','LIKE','%'.$email_address.'%');
-        })->paginate($perPage)->withQueryString();
-        return $employees;
+        });
+        $count = $employeeQuery->get()->count();
+        $employees = $employeeQuery->paginate($perPage)->withQueryString();
+        return [
+            'count' => $count,
+            'employees' => $employees,
+        ];
     }
 
     /**

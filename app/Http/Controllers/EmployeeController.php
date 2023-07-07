@@ -42,7 +42,9 @@ class EmployeeController extends Controller
     {
         $this->employeeInterface = $employeeInterface;
         $this->employeeUploadInterface = $employeeUploadInterface;
+        $this->middleware('emp.current',['only'=>['destroy','inactive','active']]);
         $this->middleware('emp.exists',['only'=>['show','update','edit','destroy','inactive','active']]);
+        $this->middleware('emp.inactive',['only'=>['update','edit','destroy','inactive']]);
     }
 
     /**
@@ -55,7 +57,7 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = $this->employeeInterface->getAllEmployeesPaginate(20);
-        return view('employee.index',compact('employees'));
+        return view('employee.index',$employees);
     }
 
     /**
@@ -110,7 +112,6 @@ class EmployeeController extends Controller
             }
         }
 
-
         if ($uploadEmployee) { #Checking if storing employee succeeded
             return redirect()->route('employees.index')->with(['status'=>'Successfully registered']);
         } else {
@@ -162,14 +163,9 @@ class EmployeeController extends Controller
      */
     public function update(UpdateEmployeeRequest $request, $id)
     {
-        $employee = $this->employeeInterface->getEmployee($id);
-
         $empCountBeforeCurrent = $this->employeeInterface->getEmpCountBeforeCurrent($id);
         $pageNo = floor($empCountBeforeCurrent/20)+1;
 
-        if($employee->deleted_at !== null) {
-            return redirect()->back()->with(['error'=>'Cannot update employee who is inactive']);
-        }
         $updateEmployee = new UpdateEmployee($request,$id);
         $updateEmployee = $updateEmployee->executeProcess();
 
@@ -205,7 +201,6 @@ class EmployeeController extends Controller
             }
         }
 
-
         if ($updateEmployee) { #Checking if storing employee succeeded
             return redirect()->route('employees.index',['page'=>$pageNo])->with(['status'=>'Successfully updated']);
         } else {
@@ -223,16 +218,6 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        if (session('employee')->id == $id) { #Checking if current employee is going to be deleted
-            return redirect()->back()->with(['error'=>'Cannot delete employee who is currently logged in']);
-        }
-
-        $employee = $this->employeeInterface->getEmployee($id);
-
-        if($employee->deleted_at !== null) {
-            return redirect()->back()->with(['error'=>'Cannot delete employee who is inactive']);
-        }
-
         $deleteEmployee = new DeleteEmployee($id);
         $deleteEmployee = $deleteEmployee->executeProcess();
 
@@ -253,8 +238,6 @@ class EmployeeController extends Controller
      */
     public function inactive($id)
     {
-        $employee = $this->employeeInterface->getEmployee($id);
-
         $inactiveEmployee = new InactiveEmployee($id);
         $inactiveEmployee = $inactiveEmployee->executeProcess();
         if ($inactiveEmployee) { #Checking if inactive process is successful
@@ -275,6 +258,10 @@ class EmployeeController extends Controller
     public function active($id)
     {
         $employee = $this->employeeInterface->getEmployee($id);
+
+        if ($employee->deleted_at == null) { #Checking if the employee is already active
+            return redirect()->back()->with(['error'=>'This employee is already active']);
+        }
 
         $activeEmployee = new ActiveEmployee($id);
         $activeEmployee = $activeEmployee->executeProcess();
@@ -307,6 +294,5 @@ class EmployeeController extends Controller
         }
 
         return redirect()->route('employees.index');
-
     }
 }

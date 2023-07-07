@@ -55,9 +55,10 @@ class UpdateEmployee extends DBTransaction
             if ($request->marital_status!=='none') { #Checking if the user submitted a marital_status field
                 $employee->marital_status = (int)$request->marital_status;
             }
-            if ($request->marital_status=='none') {
+            if ($request->marital_status=='none') { #Checking if the user didn't submit a marital_status field
                 $employee->marital_status = null;
             }
+
             if ($request->address!==null) { #Checking if the user submitted an address field
                 $employee->address = $request->address;
             }

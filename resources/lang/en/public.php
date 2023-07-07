@@ -48,4 +48,5 @@ return[
     'employee_edit'=>'Edit Employee Information',
     'update'=>'Update',
     'not_found'=>'No Employee Found',
+    'back'=>'Back',
 ];
