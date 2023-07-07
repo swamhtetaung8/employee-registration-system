@@ -37,8 +37,8 @@ class StoreEmployeeRequest extends FormRequest
     {
         return [
             'employee_id' => 'required|numeric',
-            'employee_code' => ['required'],
-            'employee_name' => ['required'],
+            'employee_code' => 'required',
+            'employee_name' => 'required',
             'nrc_number' => ['required','regex:/^[^!@#$%^&*_+=~`[\]{}|:;"<>,.?\\\]+$/'],
             'email_address' => 'required|email|unique:employees,email_address',
             'password' => 'required|regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{4,8}$/',

@@ -70,7 +70,7 @@ class EmployeeController extends Controller
     public function create()
     {
         $employees = $this->employeeInterface->getAllEmployees();
-        if(count($employees)==0){
+        if (count($employees)==0) { #Checking if there are no employees in the database
             $default_emp_id = 10001;
         }else{
             $default_emp_id =  Employee::latest('employee_id')->value('employee_id') + 1;
