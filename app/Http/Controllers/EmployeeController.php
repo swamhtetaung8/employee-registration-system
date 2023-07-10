@@ -218,10 +218,16 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
+        $empCountBeforeCurrent = $this->employeeInterface->getEmpCountBeforeCurrent($id);
+        $empCount = $this->employeeInterface->getAllEmployees()->count();
+        $pageNo = floor($empCountBeforeCurrent/20)+1;
         $deleteEmployee = new DeleteEmployee($id);
         $deleteEmployee = $deleteEmployee->executeProcess();
 
         if ($deleteEmployee) { #Checking if deleting the employee succeeded
+            if ($empCount%20 == 1) { #Checking if the deleted employee is the last employee in the pagination
+                return redirect()->route('employees.index',['page'=>$pageNo-1])->with(['status'=>'Successfully deleted']);
+            }
             return redirect()->back()->with(['status'=>'Successfully deleted']);
         } else {
             return redirect()->back()->with(['error'=>'Delete Failed']);

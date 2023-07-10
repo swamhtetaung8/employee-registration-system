@@ -97,7 +97,7 @@ class EmployeeRepository implements EmployeeInterface
          })->when(request()->email_address!='',function($query){
              $email_address = request()->get('email_address');
              $query->where('email_address','LIKE','%'.$email_address.'%');
-         })->offset((request()->page-1)*20)->limit(20)->get();
+         })->get();
          return $employees;
      }
 

@@ -125,7 +125,7 @@
                             </td>
                             <td class="text-center">
                                 @if ($employee->deleted_at==null)
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{$employee->employee_id.'inactive'}}">
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#{{$employee->employee_id.'inactive'}}">
                                     Active
                                 </button>
                                 <div class="modal fade" id="{{$employee->employee_id.'inactive'}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -133,7 +133,7 @@
                                         <div class="modal-content ">
                                           <div class="modal-header"><span class=" fw-medium">Inactive Employee {{ $employee->employee_id }}</span></div>
                                         <p class=" fs-5 pt-4">@lang('public.inactive_modal')</p>
-                                        <div class="d-flex px-4 pb-5 gap-5 justify-content-evenly align-items-center mt-3">
+                                        <div class="d-flex px-4 pb-5 justify-content-evenly align-items-center mt-3">
                                             <form action="{{ route('employees.inactive',$employee->id) }}" method="POST">
                                                 @csrf
                                                 <button class="btn btn-primary">
@@ -147,7 +147,7 @@
                                   </div>
 
                                 @else
-                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#{{$employee->employee_id.'active'}}">
+                                <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#{{$employee->employee_id.'active'}}">
                                     Inactive
                                 </button>
                                 <div class="modal fade" id="{{$employee->employee_id.'active'}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -155,7 +155,7 @@
                                         <div class="modal-content ">
                                           <div class="modal-header"><span class=" fw-medium">Active Employee {{ $employee->employee_id }}</span></div>
                                         <p class=" fs-5 pt-4">@lang('public.active_modal')</p>
-                                        <div class="d-flex px-4 pb-5 gap-5 justify-content-evenly align-items-center mt-3">
+                                        <div class="d-flex px-4 pb-5 justify-content-evenly align-items-center mt-3">
                                             <form action="{{ route('employees.active',$employee->id) }}" method="POST">
                                                 @csrf
                                                 <button class="btn btn-primary">

@@ -57,7 +57,7 @@
                             Not Selected
                         @endif
                     </td>
-                    <td>{{ $employee->address }}</td>
+                    <td style="word-wrap: break-word; max-width:100px">{{ $employee->address }}</td>
                 </tr>
             @empty
                 <tr>

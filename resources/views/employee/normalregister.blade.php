@@ -1,4 +1,4 @@
-<form action="{{ route('employees.store') }}" method="POST" class="bg-body-tertiary my-5 border p-3 rounded" enctype="multipart/form-data">
+<form action="{{ route('employees.store') }}" method="POST" class="bg-body-tertiary my-3 border p-3 rounded" enctype="multipart/form-data">
     @csrf
     <div class="row align-items-center my-3">
         <div class="col-md-3">

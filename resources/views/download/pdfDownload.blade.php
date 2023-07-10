@@ -37,7 +37,7 @@
                 <th style="width:20px;" >Gender</th>
                 <th>Date of birth</th>
                 <th style="width:20px;" >Marital Status</th>
-                <th style="width:100px;">Address</th>
+                <th style="width:100px; ">Address</th>
             </tr>
         </thead>
         <tbody>
@@ -75,7 +75,7 @@
                             Not Selected
                         @endif
                     </td>
-                    <td>{{ $employee->address }}</td>
+                    <td style="word-wrap: break-word; max-width:100px">{{ $employee->address }}</td>
                 </tr>
             @empty
                 <tr>

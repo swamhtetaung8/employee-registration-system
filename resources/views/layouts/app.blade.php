@@ -14,6 +14,10 @@
         *{
             font-family: 'Poppins', sans-serif;
         }
+        body{
+            background: rgba(255, 255, 255, 0.452);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.611) 0%, rgba(0,105,222,0.7344187675070029) 100%);
+        }
     </style>
   </head>
   <body class="bg-body-white">
@@ -23,6 +27,7 @@
     <div class="container">
         @yield('content')
     </div>
+
     @yield('script')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   </body>

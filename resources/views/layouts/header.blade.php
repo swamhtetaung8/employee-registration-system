@@ -1,4 +1,4 @@
-<nav class="py-2 bg-white border border-b sticky-top">
+<nav class="py-2 bg-body-tertiary border border-b sticky-top">
     <div class=" container d-flex align-items-center justify-content-between">
       <a href="{{ route('employees.index') }}" class=" fs-4 text-decoration-none text-black d-flex align-items-center gap-2">
         <img src="{{ asset('logos/hero-logo.svg') }}" width="30px" alt="">

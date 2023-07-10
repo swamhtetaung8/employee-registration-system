@@ -19,7 +19,7 @@
                 <div>
                     <p class="fs-4 mb-0"><i class="bi bi-person me-2"></i><span class=" border-bottom border-3 border-primary">@lang('public.employee_edit')</span> </p>
                 </div>
-                <a href="{{session()->get('_previous')['url'] }}" class="btn btn-outline-primary">@lang('public.back')</a>
+                <a href="{{url()->previous() }}" class="btn btn-outline-primary">@lang('public.back')</a>
             </div>
             <div class="my-3">
                 <div class="row my-4">
