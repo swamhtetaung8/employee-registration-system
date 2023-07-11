@@ -57,6 +57,11 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = $this->employeeInterface->getAllEmployeesPaginate(20);
+
+        if(request()->page > $employees['employees']->lastPage()){
+            return redirect()->to(request()->fullUrlWithQuery(['page'=>$employees['employees']->lastPage()]));
+        }
+
         return view('employee.index',$employees);
     }
 
@@ -163,9 +168,6 @@ class EmployeeController extends Controller
      */
     public function update(UpdateEmployeeRequest $request, $id)
     {
-        $empCountBeforeCurrent = $this->employeeInterface->getEmpCountBeforeCurrent($id);
-        $pageNo = floor($empCountBeforeCurrent/20)+1;
-
         $updateEmployee = new UpdateEmployee($request,$id);
         $updateEmployee = $updateEmployee->executeProcess();
 
@@ -195,14 +197,14 @@ class EmployeeController extends Controller
             }
 
             if ($updateEmployee && $fileUpload) { #Checking if storing employee and employee's uploaded succeeded
-                return redirect()->route('employees.index',['page'=>$pageNo])->with(['status'=>'Successfully updated']);
+                return redirect()->to($request->prev)->with(['status'=>'Successfully updated']);
             } else {
                 return redirect()->back()->with(['error'=>'Update Failed']);
             }
         }
 
         if ($updateEmployee) { #Checking if storing employee succeeded
-            return redirect()->route('employees.index',['page'=>$pageNo])->with(['status'=>'Successfully updated']);
+            return redirect()->to($request->prev)->with(['status'=>'Successfully updated']);
         } else {
             return redirect()->back()->with(['error'=>'Update Failed']);
         }
@@ -218,16 +220,10 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $empCountBeforeCurrent = $this->employeeInterface->getEmpCountBeforeCurrent($id);
-        $empCount = $this->employeeInterface->getAllEmployees()->count();
-        $pageNo = floor($empCountBeforeCurrent/20)+1;
         $deleteEmployee = new DeleteEmployee($id);
         $deleteEmployee = $deleteEmployee->executeProcess();
 
         if ($deleteEmployee) { #Checking if deleting the employee succeeded
-            if ($empCount%20 == 1) { #Checking if the deleted employee is the last employee in the pagination
-                return redirect()->route('employees.index',['page'=>$pageNo-1])->with(['status'=>'Successfully deleted']);
-            }
             return redirect()->back()->with(['status'=>'Successfully deleted']);
         } else {
             return redirect()->back()->with(['error'=>'Delete Failed']);

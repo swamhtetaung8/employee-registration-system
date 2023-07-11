@@ -166,7 +166,7 @@
                         <button type="button" class="btn btn-danger d-none" id="removePhoto">@lang('public.remove')</button>
                     </div>
                 </div>
-
+                <input type="hidden" name="prev" value="{{ url()->previous() }}">
             </div>
             <div class="d-flex justify-content-center mt-5 mb-3">
                 <button class=" btn btn-primary px-5 py-2" type="submit">@lang('public.update')</button>

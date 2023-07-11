@@ -5,9 +5,8 @@
     </div>
     <div class="d-flex justify-content-center align-items-center my-5"  dropzone="excelInput">
         <div class="border p-5 w-50 rounded border text-center bg-white" style="cursor:pointer" id="excelDrop">
-            <div style="transform: rotate(20deg)">
-                <i class="bi bi-paperclip fs-3 text-muted " ></i>
-            </div>
+            <i class="bi bi-paperclip fs-3 text-muted d-inline-block "  style="transform: rotate(20deg)" ></i>
+
             <p class="mt-2">@lang('public.browse_excel_file')</p>
         </div>
     </div>

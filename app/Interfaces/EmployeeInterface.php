@@ -11,6 +11,4 @@ interface EmployeeInterface
     public function getEmployee($id);
 
     public function getAllEmployeesDownload();
-
-    public function getEmpCountBeforeCurrent($id);
 }
