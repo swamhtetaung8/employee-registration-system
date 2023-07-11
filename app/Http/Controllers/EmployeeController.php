@@ -58,7 +58,7 @@ class EmployeeController extends Controller
     {
         $employees = $this->employeeInterface->getAllEmployeesPaginate(20);
 
-        if(request()->page > $employees['employees']->lastPage()){
+        if (request()->page > $employees['employees']->lastPage()) { #Checking if the page from request is greater than last page
             return redirect()->to(request()->fullUrlWithQuery(['page'=>$employees['employees']->lastPage()]));
         }
 
@@ -197,6 +197,9 @@ class EmployeeController extends Controller
             }
 
             if ($updateEmployee && $fileUpload) { #Checking if storing employee and employee's uploaded succeeded
+                if ($request->prev == route('employees.edit',$id)) { #Checking if the user comes from other url
+                    return redirect()->route('employees.index')->with(['status'=>'Successfully updated']);
+                }
                 return redirect()->to($request->prev)->with(['status'=>'Successfully updated']);
             } else {
                 return redirect()->back()->with(['error'=>'Update Failed']);
@@ -204,6 +207,9 @@ class EmployeeController extends Controller
         }
 
         if ($updateEmployee) { #Checking if storing employee succeeded
+            if ($request->prev == route('employees.edit',$id)) { #Checking if the user comes from other url
+                return redirect()->route('employees.index')->with(['status'=>'Successfully updated']);
+            }
             return redirect()->to($request->prev)->with(['status'=>'Successfully updated']);
         } else {
             return redirect()->back()->with(['error'=>'Update Failed']);

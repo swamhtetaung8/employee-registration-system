@@ -106,9 +106,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($employees as $employee)
+                    @forelse ($employees as $index=>$employee)
                         <tr class="align-middle">
-                            <td class="text-center">{{ $employee->id }}</td>
+                            <td class="text-center">{{ ($index+1) + (($employees->currentPage() - 1) * 20) }}</td>
                             <td class="text-center">{{ $employee->employee_id }}</td>
                             <td class="text-center">{{ $employee->employee_code }}</td>
                             <td class="text-center">{{ $employee->employee_name }}</td>

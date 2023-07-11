@@ -41,9 +41,9 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($employees as $employee)
+            @forelse ($employees as $index=>$employee)
                 <tr>
-                    <td>{{ $employee->id }}</td>
+                    <td>{{ ($index+1)}}</td>
                     <td>{{ $employee->employee_id }}</td>
                     <td>{{ $employee->employee_code }}</td>
                     <td>{{ $employee->employee_name }}</td>
