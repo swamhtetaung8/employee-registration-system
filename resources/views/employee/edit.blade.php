@@ -19,6 +19,7 @@
                 <div>
                     <p class="fs-4 mb-0"><i class="bi bi-person me-2"></i><span class=" border-bottom border-3 border-primary">@lang('public.employee_edit')</span> </p>
                 </div>
+                <a href="{{ session('prev_url') ?? route('employees.index') }}" class=" btn btn-outline-primary">Back</a>
             </div>
             <div class="my-3">
                 <div class="row my-4">
@@ -166,7 +167,6 @@
                         <button type="button" class="btn btn-danger d-none" id="removePhoto">@lang('public.remove')</button>
                     </div>
                 </div>
-                <input type="hidden" name="prev" value="{{ url()->previous() }}">
             </div>
             <div class="d-flex justify-content-center mt-5 mb-3">
                 <button class=" btn btn-primary px-5 py-2" type="submit">@lang('public.update')</button>

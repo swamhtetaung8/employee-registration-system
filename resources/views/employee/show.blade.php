@@ -10,6 +10,8 @@
                     <div>
                         <p class="fs-4 mb-0"><i class="bi bi-person me-2"></i><span class=" border-bottom border-3 border-primary"> @lang('public.employee_detail')</span></p>
                     </div>
+                <a href="{{ session('prev_url') ?? route('employees.index') }}" class=" btn btn-outline-primary">Back</a>
+
                 </div>
             <div class="my-3">
                 <div class="row my-4">

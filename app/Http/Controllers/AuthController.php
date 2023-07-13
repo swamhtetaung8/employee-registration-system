@@ -80,6 +80,7 @@ class AuthController extends Controller
     {
         session()->forget('employee');
         session()->forget('employee_photo');
+        session()->forget('prev_url');
         return redirect()->route('auth.login');
     }
 }
