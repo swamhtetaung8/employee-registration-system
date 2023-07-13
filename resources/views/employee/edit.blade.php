@@ -19,7 +19,6 @@
                 <div>
                     <p class="fs-4 mb-0"><i class="bi bi-person me-2"></i><span class=" border-bottom border-3 border-primary">@lang('public.employee_edit')</span> </p>
                 </div>
-                <a href="{{url()->previous() }}" class="btn btn-outline-primary">@lang('public.back')</a>
             </div>
             <div class="my-3">
                 <div class="row my-4">
@@ -115,7 +114,7 @@
                     <div class="col-md-3">
                         <label for="" class="form-label">@lang('public.date_of_birth')<span class=" text-danger">*</span></label>
                     </div>
-                    <div class="col-md-4 d-flex gap-3">
+                    <div class="col-md-4">
                         <input type="date" name="date_of_birth" class="form-control @error('date_of_birth')
                             is-invalid
                         @enderror" value={{ old('date_of_birth',$employee->date_of_birth) }}>
@@ -123,8 +122,9 @@
                             <div class=" invalid-feedback">
                                 {{ $message }}
                             </div>
-                        @enderror
+                    @enderror
                     </div>
+
                 </div>
                 <div class="row align-items-center my-3">
                     <div class="col-md-3">
