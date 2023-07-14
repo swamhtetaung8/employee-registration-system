@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-
     @if (session('status'))
         <div class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
             <i class="bi bi-check-circle-fill me-2"></i>{{ session('status') }}

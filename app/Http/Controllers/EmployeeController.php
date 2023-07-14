@@ -100,7 +100,7 @@ class EmployeeController extends Controller
             $photo = $request->file('photo');
             $photoExtension = $photo->getClientOriginalExtension();
             $photoSize = $photo->getSize();
-            $fileName = $request->employee_name.time().'.'.$photoExtension;
+            $fileName = $request->employee_id.time().'.'.$photoExtension;
             $fileSave = $photo->move(public_path('register'),$fileName);
 
             $file = [
@@ -134,7 +134,12 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        session()->put("prev_url_for_show_$id",url()->previous());
+        if (session('employee')->id == $id) { #Checking if the employee is currently logged in user
+            session()->put("prev_url_for_show_$id",route('employees.index'));
+        } else {
+            session()->put("prev_url_for_show_$id",url()->previous());
+        }
+
         $employee = $this->employeeInterface->getEmployee($id);
         $employeePhoto = $this->employeeUploadInterface->getEmployeeUpload($employee->employee_id);
 
@@ -179,7 +184,7 @@ class EmployeeController extends Controller
             $photo = $request->file('photo');
             $photoExtension = $photo->getClientOriginalExtension();
             $photoSize = $photo->getSize();
-            $fileName = $request->employee_name.time().'.'.$photoExtension;
+            $fileName = $request->employee_id.time().'.'.$photoExtension;
             $fileSave = $photo->move(public_path('register'),$fileName);
 
             $file = [
@@ -231,6 +236,7 @@ class EmployeeController extends Controller
 
         if ($deleteEmployee) { #Checking if deleting the employee succeeded
             session()->forget("prev_url_$id");
+            session()->forget("prev_url_for_show_$id");
             return redirect()->back()->with(['status'=>'Successfully deleted']);
         } else {
             return redirect()->back()->with(['error'=>'Delete Failed']);
