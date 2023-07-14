@@ -56,11 +56,10 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        session()->put('prev_url',request()->fullUrl());
         $employees = $this->employeeInterface->getAllEmployeesPaginate(20);
 
         if (request()->page > $employees['employees']->lastPage()) { #Checking if the page from request is greater than last page
-            return redirect()->to(request()->fullUrlWithQuery(['page'=>$employees['employees']->lastPage()]));
+            return redirect()->to(request()->fullUrlWithQuery(['page'=>$employees['employees']->lastPage()]))->with(['status'=>session('status')]);
         }
 
         return view('employee.index',$employees);
@@ -135,6 +134,7 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
+        session()->put("prev_url_for_show_$id",url()->previous());
         $employee = $this->employeeInterface->getEmployee($id);
         $employeePhoto = $this->employeeUploadInterface->getEmployeeUpload($employee->employee_id);
 
@@ -151,6 +151,9 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
+        if (url()->previous() !== route('employees.edit',$id)) { #Checking if current page url is the same as previous url
+            session()->put("prev_url_$id",url()->previous());
+        }
         $employee = $this->employeeInterface->getEmployee($id);
 
         $employeePhoto = $this->employeeUploadInterface->getEmployeeUpload($employee->employee_id);
@@ -171,7 +174,7 @@ class EmployeeController extends Controller
     {
         $updateEmployee = new UpdateEmployee($request,$id);
         $updateEmployee = $updateEmployee->executeProcess();
-
+        $prevUrl = session("prev_url_$id");
         if ($request->hasFile('photo')) { #Checking if the user uploaded a photo
             $photo = $request->file('photo');
             $photoExtension = $photo->getClientOriginalExtension();
@@ -198,14 +201,16 @@ class EmployeeController extends Controller
             }
 
             if ($updateEmployee && $fileUpload) { #Checking if storing employee and employee's uploaded succeeded
-                return redirect()->to(session('prev_url'))->with(['status'=>'Successfully updated']);
+                session()->forget("prev_url_$id");
+                return redirect()->to($prevUrl)->with(['status'=>'Successfully updated']);
             } else {
                 return redirect()->back()->with(['error'=>'Update Failed']);
             }
         }
 
         if ($updateEmployee) { #Checking if storing employee succeeded
-            return redirect()->to(session('prev_url'))->with(['status'=>'Successfully updated']);
+            session()->forget("prev_url_$id");
+            return redirect()->to($prevUrl)->with(['status'=>'Successfully updated']);
         } else {
             return redirect()->back()->with(['error'=>'Update Failed']);
         }
@@ -225,6 +230,7 @@ class EmployeeController extends Controller
         $deleteEmployee = $deleteEmployee->executeProcess();
 
         if ($deleteEmployee) { #Checking if deleting the employee succeeded
+            session()->forget("prev_url_$id");
             return redirect()->back()->with(['status'=>'Successfully deleted']);
         } else {
             return redirect()->back()->with(['error'=>'Delete Failed']);

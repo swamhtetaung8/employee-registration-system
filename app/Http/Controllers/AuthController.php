@@ -78,9 +78,7 @@ class AuthController extends Controller
 
     public function logout()
     {
-        session()->forget('employee');
-        session()->forget('employee_photo');
-        session()->forget('prev_url');
+        session()->flush();
         return redirect()->route('auth.login');
     }
 }
