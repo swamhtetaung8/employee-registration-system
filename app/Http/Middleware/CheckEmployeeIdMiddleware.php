@@ -29,7 +29,10 @@ class CheckEmployeeIdMiddleware
     {
         $employee = Employee::find($request->employee);
         if (!$employee) { #Checking if employee with specified id exists
-            return redirect()->route('employees.index')->with(['error'=>'Employee does not exist']);
+            if (request()->method() == 'PUT') { #Checking if request method is PUT
+                return redirect()->to(session("prev_url_$request->employee"))->with(['error'=>'Employee does not exist']);
+            };
+            return redirect()->back()->with(['error'=>'Employee does not exist']);
         }
         return $next($request);
     }

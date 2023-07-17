@@ -29,7 +29,10 @@ class CheckInactiveEmployeeMiddleware
     {
         $employee = Employee::find($request->employee);
         if ($employee->deleted_at !== null) { #Checking if current employee is inactive
-            return redirect()->route('employees.index')->with(['error'=>'This employee is currently inactive.']);
+            if (request()->method() == 'PUT') {  #Checking if request method is PUT
+                return redirect()->to(session("prev_url_$request->employee"))->with(['error'=>'This employee is currently inactive.']);
+            };
+            return redirect()->back()->with(['error'=>'This employee is currently inactive.']);
         }
         return $next($request);
     }

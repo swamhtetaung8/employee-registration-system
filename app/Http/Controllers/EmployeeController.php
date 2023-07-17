@@ -235,8 +235,6 @@ class EmployeeController extends Controller
         $deleteEmployee = $deleteEmployee->executeProcess();
 
         if ($deleteEmployee) { #Checking if deleting the employee succeeded
-            session()->forget("prev_url_$id");
-            session()->forget("prev_url_for_show_$id");
             return redirect()->back()->with(['status'=>'Successfully deleted']);
         } else {
             return redirect()->back()->with(['error'=>'Delete Failed']);
