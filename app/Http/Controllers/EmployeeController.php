@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DBTransactions\EmployeeUpload\DeleteEmployeeUpload;
 use App\DBTransactions\EmployeeUpload\UpdateEmployeeUpload;
 use App\Models\Employee;
 use Illuminate\Http\Request;
@@ -282,6 +283,31 @@ class EmployeeController extends Controller
             return redirect()->back()->with(['status'=>'Successfully actived user']);
         } else {
             return redirect()->back()->with(['error'=>'Active failed']);
+        }
+    }
+
+    /**
+     * To delete photo of employee
+     * @author Swam Htet Aung
+     *
+     * @create date 17-07-2023
+     * @param  $id
+     * @return redirect
+     */
+    public function deletePhoto($id)
+    {
+        $employee = $this->employeeUploadInterface->getEmployeeUpload($id);
+
+        if (!$employee) { #Checking if the employee is already active
+            return redirect()->back()->with(['error'=>'The employee does not have a photo']);
+        }
+
+        $deleteEmployeeUpload = new DeleteEmployeeUpload($id);
+        $deleteEmployeeUpload = $deleteEmployeeUpload->executeProcess();
+        if ($deleteEmployeeUpload) { #Checking if active process is successful
+            return redirect()->back()->with(['status'=>'Successfully deleted photo']);
+        } else {
+            return redirect()->back()->with(['error'=>'Deleting photo failed']);
         }
     }
 

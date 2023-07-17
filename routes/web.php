@@ -28,6 +28,8 @@ Route::middleware('emp.authenticated')->group(function(){
         Route::post('/inactive/{employee}','EmployeeController@inactive')->name('inactive');
         //Employee active handling
         Route::post('/active/{employee}','EmployeeController@active')->name('active');
+        //Delete employee's photo
+        Route::delete('/delete-photo/{employee}','EmployeeController@deletePhoto')->name('deletePhoto');
         //Excel format export
         Route::get('/excel/export','ExcelController@export')->name('excelexport');
         //Excel import
