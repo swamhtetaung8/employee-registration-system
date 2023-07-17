@@ -67,6 +67,6 @@ class Kernel extends HttpKernel
         'emp.unauthenticated'=> Middleware\CheckUnauthenticatedMiddleware::class,
         'emp.exists'=> Middleware\CheckEmployeeIdMiddleware::class,
         'emp.inactive'=> Middleware\CheckInactiveEmployeeMiddleware::class,
-        'emp.current'=> Middleware\CheckCureentLoggedInUserMiddleware::class,
+        'emp.current'=> Middleware\CheckCurrentLoggedInUserMiddleware::class,
     ];
 }

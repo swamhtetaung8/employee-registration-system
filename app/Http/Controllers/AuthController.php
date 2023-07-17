@@ -56,9 +56,9 @@ class AuthController extends Controller
             }
 
             session()->put('employee',$employee);
-            if(isset($employee->upload->file_path)){
+            if (isset($employee->upload->file_path)) { #Checking if the logged in employee has a photo
                 session()->put('employee_photo',asset($employee->upload->file_path));
-            }else{
+            } else {
                 session()->put('employee_photo','https://i.pinimg.com/564x/16/3e/39/163e39beaa36d1f9a061b0f0c5669750.jpg');
             }
 

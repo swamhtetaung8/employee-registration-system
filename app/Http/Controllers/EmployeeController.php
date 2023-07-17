@@ -32,7 +32,7 @@ class EmployeeController extends Controller
     protected $employeeInterface,$employeeUploadInterface;
 
     /**
-     * Storing Interface variables
+     * Storing Interface variables and registering middlewares
      * @author Swam Htet Aung
      *
      * @create date 03-07-2023
@@ -77,7 +77,7 @@ class EmployeeController extends Controller
         $employees = $this->employeeInterface->getAllEmployees();
         if (count($employees)==0) { #Checking if there are no employees in the database
             $default_emp_id = 10001;
-        }else{
+        } else {
             $default_emp_id =  Employee::latest('employee_id')->value('employee_id') + 1;
         }
         return view('employee.create',compact('default_emp_id'));

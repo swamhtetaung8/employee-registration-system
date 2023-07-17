@@ -24,7 +24,7 @@ class CheckUnauthenticatedMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(session()->has('employee')){
+        if (session()->has('employee')) { #Checking if the user is already logged in
             return redirect()->route('employees.index');
         }
         return $next($request);

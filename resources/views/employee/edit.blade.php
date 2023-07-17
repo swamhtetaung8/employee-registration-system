@@ -145,7 +145,7 @@
                         <label for="" class="form-label">@lang('public.address') </label>
                     </div>
                     <div class="col-md-9">
-                       <textarea name="address" class=" form-control" id="" cols="30" rows="4"> {{ old('address',$employee->address) }}</textarea>
+                       <textarea name="address" class=" form-control" id="" cols="30" rows="4">{{ old('address',$employee->address) }}</textarea>
                     </div>
                 </div>
 

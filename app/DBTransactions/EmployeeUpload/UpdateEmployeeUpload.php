@@ -55,7 +55,7 @@ class UpdateEmployeeUpload extends DBTransaction
                     session()->put('employee_photo',asset($file['path']));
                 }
                 return ['status' =>true,'error' =>''];
-            }else{
+            } else {
                 return ['status' =>false,'error' =>'Failed'];
             }
     }

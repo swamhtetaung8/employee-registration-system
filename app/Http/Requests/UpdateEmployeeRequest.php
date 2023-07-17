@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Employee;
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**

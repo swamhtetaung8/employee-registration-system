@@ -25,7 +25,7 @@ class CheckAuthenticatedMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(!session()->has('employee')){
+        if (!session()->has('employee')) { #Checking if the employee is not logged in
             return redirect()->route('auth.login');
         }
         return $next($request);

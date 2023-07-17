@@ -65,7 +65,7 @@ class StoreEmployee extends DBTransaction
 
             if ($employee) { #Checking if storing the employee information succeeded
                 return ['status' =>true,'error' =>''];
-            }else{
+            } else {
                 return ['status' =>false,'error' =>'Failed'];
             }
     }

@@ -70,7 +70,7 @@ class UpdateEmployee extends DBTransaction
                     session()->put('employee',Employee::find($this->id));
                 }
                 return ['status' =>true,'error' =>''];
-            }else{
+            } else {
                 return ['status' =>false,'error' =>'Failed'];
             }
     }
