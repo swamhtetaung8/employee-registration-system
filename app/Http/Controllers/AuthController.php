@@ -22,7 +22,7 @@ class AuthController extends Controller
      *
      * @author Swam Htet Aung
      * @create date 21-06-2023
-     * @return view
+     * @return 'view'
      *
     */
     public function login()
@@ -36,7 +36,7 @@ class AuthController extends Controller
      * @author Swam Htet Aung
      * @create date 21-06-2023
      * @param LoginRequest $request
-     * @return redirect
+     * @return 'redirect'
      *
     */
     public function check(LoginRequest $request)
@@ -72,7 +72,7 @@ class AuthController extends Controller
      *
      * @author Swam Htet Aung
      * @create date 21-06-2023
-     * @return redirect
+     * @return 'redirect'
      *
     */
 

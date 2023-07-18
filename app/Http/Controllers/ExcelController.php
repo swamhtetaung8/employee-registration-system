@@ -22,7 +22,7 @@ class ExcelController extends Controller
      *
      * @author Swam Htet Aung
      * @create date 23-06-2023
-     * @return Excel
+     * @return 'Excel'
      *
     */
     public function export()
@@ -36,7 +36,7 @@ class ExcelController extends Controller
      * @author Swam Htet Aung
      * @create date 23-06-2023
      * @param ExcelImportRequest $request
-     * @return redirect
+     * @return 'redirect'
      *
     */
     public function import(ExcelImportRequest $request)

@@ -44,8 +44,8 @@ class EmployeeController extends Controller
         $this->employeeInterface = $employeeInterface;
         $this->employeeUploadInterface = $employeeUploadInterface;
         $this->middleware('emp.current',['only'=>['destroy','inactive','active']]);
-        $this->middleware('emp.exists',['only'=>['show','update','edit','destroy','inactive','active']]);
-        $this->middleware('emp.inactive',['only'=>['update','edit','destroy','inactive']]);
+        $this->middleware('emp.exists',['only'=>['show','update','edit','destroy','inactive','active','deletePhoto']]);
+        $this->middleware('emp.inactive',['only'=>['update','edit','destroy','inactive','deletePhoto']]);
     }
 
     /**
@@ -53,7 +53,7 @@ class EmployeeController extends Controller
      * @author Swam Htet Aung
      *
      * @create date 21-06-2023
-     * @return view
+     * @return 'view'
      */
     public function index()
     {
@@ -71,7 +71,7 @@ class EmployeeController extends Controller
      * @author Swam Htet Aung
      *
      * @create date 21-06-2023
-     * @return view
+     * @return 'view'
      */
     public function create()
     {
@@ -90,7 +90,7 @@ class EmployeeController extends Controller
      *
      * @create date 22-06-2023
      * @param  StoreEmployeeRequest $request
-     * @return redirect
+     * @return 'redirect'
      */
     public function store(StoreEmployeeRequest $request)
     {
@@ -131,7 +131,7 @@ class EmployeeController extends Controller
      *
      * @create date 22-06-2023
      * @param  $id
-     * @return view
+     * @return 'view'
      */
     public function show($id)
     {
@@ -153,7 +153,7 @@ class EmployeeController extends Controller
      *
      * @create date 26-06-2023
      * @param  $id
-     * @return view
+     * @return 'view'
      */
     public function edit($id)
     {
@@ -174,7 +174,7 @@ class EmployeeController extends Controller
      * @create date 26-06-2023
      * @param  Request $request
      * @param  $id
-     * @return redirect
+     * @return 'redirect'
      */
     public function update(UpdateEmployeeRequest $request, $id)
     {
@@ -228,7 +228,7 @@ class EmployeeController extends Controller
      *
      * @create date 26-06-2023
      * @param  $id
-     * @return redirect
+     * @return 'redirect'
      */
     public function destroy($id)
     {
@@ -248,7 +248,7 @@ class EmployeeController extends Controller
      *
      * @create date 26-06-2023
      * @param  $id
-     * @return redirect
+     * @return 'redirect'
      */
     public function inactive($id)
     {
@@ -267,7 +267,7 @@ class EmployeeController extends Controller
      *
      * @create date 26-06-2023
      * @param  $id
-     * @return redirect
+     * @return 'redirect'
      */
     public function active($id)
     {
@@ -292,17 +292,18 @@ class EmployeeController extends Controller
      *
      * @create date 17-07-2023
      * @param  $id
-     * @return redirect
+     * @return 'redirect'
      */
     public function deletePhoto($id)
     {
-        $employee = $this->employeeUploadInterface->getEmployeeUpload($id);
+        $employee = $this->employeeInterface->getEmployee($id);
+        $employeeUpload = $this->employeeUploadInterface->getEmployeeUpload($employee->employee_id);
 
-        if (!$employee) { #Checking if the employee is already active
+        if (!$employeeUpload) { #Checking if the employee is doesn't have a photo
             return redirect()->back()->with(['error'=>'The employee does not have a photo']);
         }
 
-        $deleteEmployeeUpload = new DeleteEmployeeUpload($id);
+        $deleteEmployeeUpload = new DeleteEmployeeUpload($employee->employee_id);
         $deleteEmployeeUpload = $deleteEmployeeUpload->executeProcess();
         if ($deleteEmployeeUpload) { #Checking if active process is successful
             return redirect()->back()->with(['status'=>'Successfully deleted photo']);
@@ -317,7 +318,7 @@ class EmployeeController extends Controller
      *
      * @create date 26-06-2023
      * @param  Request $request
-     * @return redirect
+     * @return mixed
      */
     public function download(Request $request)
     {

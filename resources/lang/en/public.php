@@ -49,4 +49,5 @@ return[
     'update'=>'Update',
     'not_found'=>'No Employee Found',
     'back'=>'Back',
+    'remove_photo'=>'Remove Photo',
 ];

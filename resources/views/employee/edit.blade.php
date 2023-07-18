@@ -18,9 +18,9 @@
         </div>
     @endif
     @if ($employee->upload)
-        <form id="deletePhotoForm" action="{{ route('employees.deletePhoto', $employee->upload->employee_id) }}" method="POST">
+        <form id="deletePhotoForm" action="{{ route('employees.deletePhoto', $employee->id) }}" method="POST">
             @csrf
-            @method('DELETE')
+            @method('PUT')
         </form>
     @endif
     <form id="updateForm" action="{{ route('employees.update', $employee->id) }}" method="POST"
@@ -34,7 +34,7 @@
                         class=" border-bottom border-3 border-primary">@lang('public.employee_edit')</span> </p>
             </div>
             <a href="{{ session("prev_url_$employee->id") ?? route('employees.index') }}"
-                class=" btn btn-outline-primary">Back</a>
+                class=" btn btn-outline-primary">@lang('public.back')</a>
         </div>
         <div class="my-3">
             <div class="row my-4 align-items-end">
@@ -44,7 +44,7 @@
                 </div>
                 @if ($employee->upload)
                     <div class="col-md-2">
-                        <button form="deletePhotoForm" type="submit" class="btn btn-danger">Remove Photo</button>
+                        <button form="deletePhotoForm" type="submit" class="btn btn-danger">@lang('public.remove_photo')</button>
                     </div>
                 @endif
             </div>
