@@ -207,7 +207,6 @@ class EmployeeController extends Controller
             }
 
             if ($updateEmployee && $fileUpload) { #Checking if storing employee and employee's uploaded succeeded
-                session()->forget("prev_url_$id");
                 return redirect()->to($prevUrl)->with(['status'=>'Successfully updated']);
             } else {
                 return redirect()->back()->with(['error'=>'Update Failed']);
@@ -215,7 +214,6 @@ class EmployeeController extends Controller
         }
 
         if ($updateEmployee) { #Checking if storing employee succeeded
-            session()->forget("prev_url_$id");
             return redirect()->to($prevUrl)->with(['status'=>'Successfully updated']);
         } else {
             return redirect()->back()->with(['error'=>'Update Failed']);
